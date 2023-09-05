@@ -15,6 +15,7 @@ class StrobeController:
     
     def start(self) -> None:
         while True:
+            time.sleep(0.01)
             if self.mode == MODE_OFF:
                 GPIO.output(self.gpio, GPIO.LOW)
             elif self.mode == MODE_ON:
