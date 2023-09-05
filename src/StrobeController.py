@@ -22,10 +22,10 @@ class StrobeController:
                 GPIO.output(self.gpio, GPIO.HIGH)
             elif self.mode == MODE_STATIONARY:
 
-                # turn on for 2 seconds
+                # turn on
                 GPIO.output(self.gpio, GPIO.HIGH)
                 tstart:float = time.time()
-                while ((time.time() - tstart) < 2.0):
+                while ((time.time() - tstart) < 1.25):
                     time.sleep(0.01)
                     if self.mode != MODE_STATIONARY:
                         break
