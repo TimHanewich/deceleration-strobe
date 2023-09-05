@@ -9,7 +9,6 @@ class StrobeController:
 
     def __init__(self, gpio:int) -> None:
         self.mode = MODE_OFF
-        self._last_mode = MODE_OFF
         self.gpio = gpio
         GPIO.setup(self.gpio, GPIO.OUT)
     
