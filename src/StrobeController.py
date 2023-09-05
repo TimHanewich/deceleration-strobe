@@ -1,0 +1,40 @@
+import RPi.GPIO as GPIO
+import time
+
+MODE_OFF:int = 0
+MODE_ON:int = 1
+MODE_STATIONARY:int = 2
+
+class StrobeController:
+
+    def __init__(self, gpio:int) -> None:
+        self.mode = MODE_OFF
+        self._last_mode = MODE_OFF
+        self.gpio = gpio
+        GPIO.setup(self.gpio, GPIO.OUT)
+    
+    def start(self) -> None:
+        while True:
+            if self.mode == MODE_OFF:
+                GPIO.output(self.gpio, GPIO.LOW)
+            elif self.mode == MODE_ON:
+                GPIO.output(self.gpio, GPIO.HIGH)
+            elif self.mode == MODE_STATIONARY:
+
+                # turn on for 2 seconds
+                GPIO.output(self.gpio, GPIO.HIGH)
+                tstart:float = time.time()
+                while ((time.time() - tstart) < 2.0):
+                    time.sleep(0.01)
+                    if self.mode != MODE_STATIONARY:
+                        break
+
+                # turn off for 3 seconds
+                GPIO.output(self.gpio, GPIO.LOW)
+                tstart:float = time.time()
+                while ((time.time() - tstart) < 2.0):
+                    time.sleep(0.01)
+                    if self.mode != MODE_STATIONARY:
+                        break
+
+
