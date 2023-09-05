@@ -33,7 +33,7 @@ class StrobeController:
                 # turn off
                 GPIO.output(self.gpio, GPIO.LOW)
                 tstart:float = time.time()
-                while ((time.time() - tstart) < 3.0):
+                while ((time.time() - tstart) < 2.5):
                     time.sleep(0.01)
                     if self.mode != MODE_STATIONARY:
                         break
