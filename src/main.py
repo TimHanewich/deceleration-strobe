@@ -39,7 +39,7 @@ while True:
 
             # if we have data
             if (time.ticks_ms() - n.speed_last_updated_ticks_ms) < 5000: # if we have data that is newer than 5 seconds old.
-                print("Data is new! Feeding to strobe calculator...")
+                print("Data is new! Current speed: " + str(n.speed_mph) + " MPH. Feeding to strobe calculator...")
                 calculator.feed(n.speed_mph, n.speed_last_updated_ticks_ms)
                 sc.mode = calculator.mode
                 print("StrobeController set to mode '" + str(calculator.mode) + "'")
