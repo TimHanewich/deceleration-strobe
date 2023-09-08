@@ -4,6 +4,7 @@ import time
 MODE_OFF:int = 0
 MODE_ON:int = 1
 MODE_STATIONARY:int = 2
+MODE_NEUTRAL:int = 3 # "neutral", like no signal. Just a bit of pattern.
 
 class StrobeController:
 
@@ -35,5 +36,26 @@ class StrobeController:
                     time.sleep(0.01)
                     if self.mode != MODE_STATIONARY:
                         break
+            
+            elif self.mode == MODE_NEUTRAL:
+
+                # turn on
+                self.led.on()
+                tstart:float = time.time()
+                while ((time.time() - tstart) < 0.6):
+                    time.sleep(0.01)
+                    if self.mode != MODE_NEUTRAL:
+                        break
+
+                # turn off
+                self.led.off()
+                tstart:float = time.time()
+                while ((time.time() - tstart) < 4.0):
+                    time.sleep(0.01)
+                    if self.mode != MODE_NEUTRAL:
+                        break
+            
+            else:
+                self.led.off()
 
 
