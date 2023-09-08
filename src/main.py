@@ -26,7 +26,7 @@ gps = machine.UART(0, rx=machine.Pin(17), baudrate=9600) # pin number of the UAR
 print("UART bus set up!")
 print("Entering infinite loop...")
 while True:
-    print("Reading from GPS...")
+    print(str(time.ticks_ms()) + ": Reading from GPS...")
     data = gps.read()
     if data != None:
         print(str(len(data)) + " bytes read!")
