@@ -4,11 +4,12 @@ import machine
 import time
 import _thread
 import StrobeCalculator
+import settings
 
 print("Deceleration Strobe - Copyright Tim Hanewich 2023")
 
 # set up strobe controller
-sc = StrobeController.StrobeController(25) # pin number of the LED wire
+sc = StrobeController.StrobeController(settings.gpio_led) # pin number of the LED wire
 sc.mode = StrobeController.MODE_NEUTRAL
 _thread.start_new_thread(sc.start, ())
 print("Strobe controller set up and running! Beginning with neutral pattern.")
@@ -22,7 +23,7 @@ calculator:StrobeCalculator.StrobeCalculator = StrobeCalculator.StrobeCalculator
 print("Strobe Calculator set up!")
 
 # set up to receive NMEA data from NEO-6M
-gps = machine.UART(0, rx=machine.Pin(17), baudrate=9600) # pin number of the UART pin to receive data from NEO-6M GPS module
+gps = machine.UART(0, rx=machine.Pin(settings.gpio_gps_uart), baudrate=9600) # pin number of the UART pin to receive data from NEO-6M GPS module
 print("UART bus set up!")
 print("Entering infinite loop...")
 while True:

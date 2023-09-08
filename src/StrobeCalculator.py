@@ -1,4 +1,5 @@
 import StrobeController
+import settings
 
 class StrobeCalculator:
 
@@ -11,9 +12,9 @@ class StrobeCalculator:
 
         if self._last_speed_mph != None and self._last_ticks_ms != None:
             acceleration_mph_per_second:float = (speed_mph - self._last_speed_mph) / ((ticks_ms - self._last_ticks_ms)/1000)
-            if speed_mph < 10.0: # we are stationary, or below 10 MPH, so put on the stationary mode.
+            if speed_mph < settings.stationary_threshold: # we are stationary, or below 10 MPH, so put on the stationary mode.
                 self.mode = StrobeController.MODE_STATIONARY
-            elif acceleration_mph_per_second < 1.0: # shaving off 1 MPH per second
+            elif acceleration_mph_per_second < (settings.deceleration_threshold * -1): # shaving off X MPH per second
                 self.mode = StrobeController.MODE_ON
             else: # not decelerating hard enough. So turn off!
                 self.mode = StrobeController.MODE_OFF
