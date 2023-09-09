@@ -14,7 +14,7 @@ class StrobeController:
     
     def start(self) -> None:
         while True:
-            time.sleep(0.01)
+            time.sleep(0.001)
             if self.mode == MODE_OFF:
                 self.led.off()
             elif self.mode == MODE_ON:
