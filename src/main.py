@@ -1,16 +1,15 @@
 import NMEA
-import StrobeController
 import machine
 import time
 import _thread
-import StrobeCalculator
 import settings
+import strobe
 
 print("Deceleration Strobe - Copyright Tim Hanewich 2023")
 
 # set up strobe controller
-sc = StrobeController.StrobeController(settings.gpio_led) # pin number of the LED wire
-sc.mode = StrobeController.MODE_NEUTRAL
+sc = strobe.StrobeController(settings.gpio_led) # pin number of the LED wire
+sc.mode = strobe.MODE_NEUTRAL
 _thread.start_new_thread(sc.start, ())
 print("Strobe controller set up and running! Beginning with neutral pattern.")
 
@@ -19,7 +18,7 @@ n = NMEA.NMEAParser()
 print("NMEA parser set up!")
 
 # set up the strobe calculator
-calculator:StrobeCalculator.StrobeCalculator = StrobeCalculator.StrobeCalculator()
+calculator:strobe.StrobeCalculator = strobe.StrobeCalculator()
 print("Strobe Calculator set up!")
 
 # set up to receive NMEA data from NEO-6M
@@ -46,7 +45,7 @@ while True:
                 print("StrobeController set to mode '" + str(calculator.mode) + "'")
             else: # if we do not have any data...
                 print("Data is nonexistent or old! Going to neutral pattern...")
-                sc.mode = StrobeController.MODE_NEUTRAL # neutral mode (pulse every few seconds briefly)
+                sc.mode = strobe.MODE_NEUTRAL # neutral mode (pulse every few seconds briefly)
 
         except Exception as e:
             print("FAILURE!!! " + str(e))
