@@ -42,7 +42,7 @@ class StrobeController:
                 # turn on
                 self.led.on()
                 tstart:int = time.ticks_ms()
-                while ((time.ticks_ms() - tstart) < 600):
+                while ((time.ticks_ms() - tstart) < 500):
                     time.sleep(0.01)
                     if self.mode != MODE_NEUTRAL:
                         break
@@ -50,7 +50,7 @@ class StrobeController:
                 # turn off
                 self.led.off()
                 tstart:int = time.ticks_ms()
-                while ((time.ticks_ms() - tstart) < 4000):
+                while ((time.ticks_ms() - tstart) < 2000):
                     time.sleep(0.01)
                     if self.mode != MODE_NEUTRAL:
                         break
