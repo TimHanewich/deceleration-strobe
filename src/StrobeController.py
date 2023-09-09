@@ -24,7 +24,7 @@ class StrobeController:
                 # turn on
                 self.led.on()
                 tstart:float = time.time()
-                while ((time.time() - tstart) < 1.25):
+                while ((time.time() - tstart) < 1.2):
                     time.sleep(0.01)
                     if self.mode != MODE_STATIONARY:
                         break
