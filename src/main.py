@@ -7,6 +7,10 @@ import strobe
 
 print("Deceleration Strobe - Copyright Tim Hanewich 2023")
 
+# turn on onboard LED
+led = machine.Pin(25, machine.Pin.OUT)
+led.on()
+
 # set up strobe controller
 sc = strobe.StrobeController(settings.gpio_led) # pin number of the LED wire
 sc.mode = strobe.MODE_NEUTRAL
